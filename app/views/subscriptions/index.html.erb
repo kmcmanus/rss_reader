@@ -1,10 +1,10 @@
-<h1>Your Feeds</h1>
+<legend>Your Feeds</legend>
 
 <%= link_to "Subscribe", new_subscription_path, :class => "btn btn-primary" %>
 
 <ul>
   <% @subscriptions.each do |subs| %>
-    <li><%= link_to subs.name, subs.site_url %></li>
+    <li><%= link_to subs.name, subscription_path(subs) %></li>
   <% end %>
 </ul>
 
