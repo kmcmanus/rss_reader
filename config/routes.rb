@@ -1,4 +1,10 @@
 RssReader::Application.routes.draw do
+  get "subscription/index"
+
+  get "subscription/resources"
+
+  devise_for :users
+  root :to => 'subscription#index'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
