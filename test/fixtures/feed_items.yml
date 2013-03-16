@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 
+  subscription_id: 
+  date_recieved: 2013-03-16 08:47:50
+  date_published: 2013-03-16 08:47:50
+  title: MyString
+  description: MyString
+  url: MyString
+  read: false
+  saved: false
+
+two:
+  user_id: 
+  subscription_id: 
+  date_recieved: 2013-03-16 08:47:50
+  date_published: 2013-03-16 08:47:50
+  title: MyString
+  description: MyString
+  url: MyString
+  read: false
+  saved: false

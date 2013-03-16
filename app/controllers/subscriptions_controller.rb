@@ -13,6 +13,7 @@ class SubscriptionsController < ApplicationController
     @subscription = Subscription.create!
     if @subscription.update_attributes(params['subscription'])
       @subscription.load_base_data
+      @subscription.scrape
       @subscription.save!
       current_user.subscriptions << @subscription
       redirect_to :action => 'index'

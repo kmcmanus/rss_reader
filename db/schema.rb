@@ -11,16 +11,31 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130315225812) do
+ActiveRecord::Schema.define(:version => 20130316124750) do
+
+  create_table "feed_items", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "subscription_id"
+    t.datetime "date_recieved"
+    t.datetime "date_published"
+    t.string   "title"
+    t.text     "description"
+    t.string   "url"
+    t.boolean  "read"
+    t.boolean  "saved"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
 
   create_table "subscriptions", :force => true do |t|
     t.string   "name"
-    t.string   "type"
     t.string   "feed_url"
     t.string   "site_url"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
     t.integer  "user_id"
+    t.datetime "last_scraped"
+    t.datetime "most_recent_article_posted_on"
   end
 
   create_table "users", :force => true do |t|
