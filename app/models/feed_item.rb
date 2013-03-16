@@ -3,6 +3,27 @@ class FeedItem < ActiveRecord::Base
   belongs_to :user
   belongs_to :subscription
 
+  def short_description
+    if self.description.length <= 50
+      self.description
+    else
+      self.description[0..47] + '...'
+    end
+  end
+
+  def helpful_date_published
+    date = date_published_offset
+    if date.to_date == Date.today
+      date.strftime "%I:%M %p"
+    else
+      date.strftime "%B %e, %Y"
+    end
+  end
+
+  def date_published_offset
+    @date_published_offset ||= self.date_published + DateTime.now.utc_offset
+  end
+
   def scrape_from node
     scrape_attribute_from node, :date_published, 'pubDate'
     scrape_attribute_from node, :description, 'description'

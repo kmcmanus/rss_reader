@@ -21,4 +21,8 @@ class SubscriptionsController < ApplicationController
       redirect_to :action => 'edit'
     end
   end
+
+  def show
+    @subscription = Subscription.find params[:id]
+  end
 end
