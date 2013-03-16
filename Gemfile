@@ -22,6 +22,12 @@ end
 
 gem 'jquery-rails'
 gem 'bootstrap-sass'
+gem 'simple_form'
+#gem 'hoe'
+#gem 'rake-compiler'
+#gem 'mini_portile'
+gem 'nokogiri'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
