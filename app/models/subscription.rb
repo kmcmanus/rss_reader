@@ -20,17 +20,21 @@ class Subscription < ActiveRecord::Base
     xml = get_xml
     last_published_date = DateTime.new 1970, 1, 1, 1, 1, 1
     xml.xpath("/rss/channel/item").each do |node|
-      item = FeedItem.create :subscription => self, :user => self.user
+      item = FeedItem.new :subscription => self, :user => self.user
       item.date_recieved = DateTime.now
       item.read = false
       item.saved = false
       item.scrape_from node
-
+      
       if item.date_published > last_published_date
         last_published_date = item.date_published
       end
 
-      item.save!
+      if self.feed_items.where(:guid => item.guid).count == 0
+        item.save!
+      else
+        item.destroy
+      end
     end
 
     self.last_scraped = DateTime.now

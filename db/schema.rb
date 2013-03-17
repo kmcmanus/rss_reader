@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130316124750) do
+ActiveRecord::Schema.define(:version => 20130317152301) do
 
   create_table "feed_items", :force => true do |t|
     t.integer  "user_id"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(:version => 20130316124750) do
     t.boolean  "saved"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.string   "guid"
   end
 
   create_table "subscriptions", :force => true do |t|

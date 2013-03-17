@@ -1,7 +1,9 @@
 class FeedItem < ActiveRecord::Base
-  attr_accessible :date_published, :date_recieved, :description, :read, :saved, :subscription, :title, :url, :user
+  attr_accessible :date_published, :date_recieved, :description, :read, :saved, :subscription, :title, :url, :user, :guid
   belongs_to :user
   belongs_to :subscription
+
+  scope :desc, order("date_published DESC")
 
   def short_description
     if self.description.length <= 50
@@ -29,6 +31,7 @@ class FeedItem < ActiveRecord::Base
     scrape_attribute_from node, :description, 'description'
     scrape_attribute_from node, :title, 'title'
     scrape_attribute_from node, :url, 'link'
+    scrape_attribute_from node, :guid, 'guid'
   end
 
   private
