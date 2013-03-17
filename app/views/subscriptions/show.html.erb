@@ -1,18 +1,19 @@
 <legend><%= @subscription.name %></legend>
-<table class="table table-hover">
-<% @subscription.feed_items.desc.each do |item| %>
-  <tr <%= "class=info" unless item.read %>>
-    <td>
-      <img src="<%= @subscription.site_url %>/favicon.ico">
-    </td>
-    <td > <%= @subscription.name %>
-    </td>
-    <td>
-      <a href="<%= item.url %>"><%= item.title %></a> - <%= item.short_description %>  
-    </td>
-    <td>
-      <abbr title="<%= item.date_published_offset.strftime "%F %r" %>"><%= item.helpful_date_published %></abbr>
-    </td>
-  </tr>
-<% end %>
-</table>
+
+<div class="accordion" id="accordion1">
+  <% @subscription.feed_items.desc.each do |item| %>
+    <div class="accordion-group">
+      <div class="accordion-heading">
+        <img src="<%= @subscription.site_url %>/favicon.ico">
+        <a class="accordion-toggle" data-toggle='collapse' data-parent='#accordion1' href="#collapse<%= item.id %>"><%= item.title %></a>
+<%= @subscription.name %>
+        <abbr title="<%= item.date_published_offset.strftime "%F %r" %>"><%= item.helpful_date_published %></abbr>
+      </div>
+      <div id="collapse<%= item.id %>" class="accordion-body collapse">
+        <div class="accordion-inner">
+          <%= item.description.html_safe %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
