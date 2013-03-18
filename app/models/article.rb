@@ -1,7 +1,7 @@
-class FeedItem < ActiveRecord::Base
-  attr_accessible :date_published, :date_recieved, :description, :read, :saved, :subscription, :title, :url, :user, :guid
+class Article < ActiveRecord::Base
+  attr_accessible :date_published, :date_recieved, :description, :read, :saved, :feed, :title, :url, :user, :guid
   belongs_to :user
-  belongs_to :subscription
+  belongs_to :feed
 
   scope :desc, order("date_published DESC")
 

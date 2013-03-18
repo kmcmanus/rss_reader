@@ -2,7 +2,7 @@
 
 one:
   user_id: 
-  subscription_id: 
+  feed_id: 
   date_recieved: 2013-03-16 08:47:50
   date_published: 2013-03-16 08:47:50
   title: MyString
@@ -13,7 +13,7 @@ one:
 
 two:
   user_id: 
-  subscription_id: 
+  feed_id: 
   date_recieved: 2013-03-16 08:47:50
   date_published: 2013-03-16 08:47:50
   title: MyString

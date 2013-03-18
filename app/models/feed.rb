@@ -1,9 +1,9 @@
 require 'open-uri'
 require 'nokogiri'
-class Subscription < ActiveRecord::Base
+class Feed < ActiveRecord::Base
   attr_accessible :feed_url, :name, :site_url, :last_scraped, :most_recent_article_posted_on
   belongs_to :user
-  has_many :feed_items
+  has_many :articles
   def load_base_data
     xml = self.get_xml
 
@@ -20,7 +20,7 @@ class Subscription < ActiveRecord::Base
     xml = get_xml
     last_published_date = DateTime.new 1970, 1, 1, 1, 1, 1
     xml.xpath("/rss/channel/item").each do |node|
-      item = FeedItem.new :subscription => self, :user => self.user
+      item = Article.new :feed => self, :user => self.user
       item.date_recieved = DateTime.now
       item.read = false
       item.saved = false
@@ -30,7 +30,7 @@ class Subscription < ActiveRecord::Base
         last_published_date = item.date_published
       end
 
-      if self.feed_items.where(:guid => item.guid).count == 0
+      if self.articles.where(:guid => item.guid).count == 0
         item.save!
       else
         item.destroy
@@ -44,7 +44,7 @@ class Subscription < ActiveRecord::Base
   def clean
     time = DateTime.now - 1
 
-    self.feed_items.where(:date_recieved < time).destroy_all
+    self.articles.where(:date_recieved < time).destroy_all
   end
 
   private

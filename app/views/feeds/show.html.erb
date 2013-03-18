@@ -1,0 +1,19 @@
+<legend><%= @feed.name %></legend>
+
+<div class="accordion" id="accordion1">
+  <% @feed.articles.desc.each do |article| %>
+    <div class="accordion-group">
+      <div class="accordion-heading">
+        <img src="<%= @feed.site_url %>/favicon.ico">
+        <a class="accordion-toggle" data-toggle='collapse' data-parent='#accordion1' href="#collapse<%= article.id %>"><%= article.title %></a>
+<%= @feed.name %>
+        <abbr title="<%= article.date_published_offset.strftime "%F %r" %>"><%= article.helpful_date_published %></abbr>
+      </div>
+      <div id="collapse<%= article.id %>" class="accordion-body collapse">
+        <div class="accordion-inner">
+          <%= article.description.html_safe %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
