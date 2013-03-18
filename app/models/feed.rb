@@ -44,7 +44,7 @@ class Feed < ActiveRecord::Base
   def clean
     time = DateTime.now - 1
 
-    self.articles.where(:date_recieved < time).destroy_all
+    self.articles.where("date_recieved < '#{time}'").where(:saved => false).destroy_all
   end
 
   private
