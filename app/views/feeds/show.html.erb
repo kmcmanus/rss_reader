@@ -4,13 +4,31 @@
   <% @feed.articles.desc.each do |article| %>
     <div class="accordion-group">
       <div class="accordion-heading">
-        <img src="<%= @feed.site_url %>/favicon.ico">
-        <a class="accordion-toggle" data-toggle='collapse' data-parent='#accordion1' href="#collapse<%= article.id %>"><%= article.title %></a>
-<%= @feed.name %>
-        <abbr title="<%= article.date_published_offset.strftime "%F %r" %>"><%= article.helpful_date_published %></abbr>
+        <a class="accordion-toggle" data-toggle='collapse' data-parent='#accordion1' href="#collapse<%= article.id %>">
+          <div class="row show-grid">
+            <div class="span2">
+              <% if article.saved %>
+                <button class="btn btn-danger btn-mini"><i class='icon-heart icon-white'></i></button>
+              <% else %>
+                <button class="btn btn-mini disabled"><i class="icon-heart"></i></button>
+              <% end %>
+              <%= @feed.name %>
+            </div>
+            <div class="span9 <%= 'muted' if article.read %>">
+              <% if article.read %>
+                <%= article.title %>
+              <% else %>
+                <b><%= article.title %></b>
+              <% end %>
+              <abbr title="<%= article.date_published_offset.strftime "%F %r" %>"><%= article.helpful_date_published %></abbr>
+            </div>
+          </div>
+        </a>
       </div>
       <div id="collapse<%= article.id %>" class="accordion-body collapse">
         <div class="accordion-inner">
+          <h4><a target="_blank" href="<%= article.url %>"><%= article.title%></a></h4>
+          <p><small> <%= link_to article.feed.name, article.feed %> by <%= article.author%> </small></p>
           <%= article.description.html_safe %>
         </div>
       </div>

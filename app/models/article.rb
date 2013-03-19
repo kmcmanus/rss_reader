@@ -32,6 +32,7 @@ class Article < ActiveRecord::Base
     scrape_attribute_from node, :title, 'title'
     scrape_attribute_from node, :url, 'link'
     scrape_attribute_from node, :guid, 'guid'
+    scrape_attribute_from node, :author, 'dc:creator'
   end
 
   private
