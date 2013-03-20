@@ -13,6 +13,26 @@ class Article < ActiveRecord::Base
     end
   end
 
+  def mark_saved
+    self.saved = true
+    self.save!
+  end
+
+  def mark_unsaved
+    self.saved = false
+    self.save!
+  end
+
+  def mark_read
+    self.read = true
+    self.save!
+  end
+
+  def mark_unread
+    self.read = false
+    self.save!
+  end
+
   def helpful_date_published
     date = date_published_offset
     if date.to_date == Date.today

@@ -8,9 +8,9 @@
           <div class="row show-grid">
             <div class="span2">
               <% if article.saved %>
-                <button class="btn btn-danger btn-mini"><i class='icon-heart icon-white'></i></button>
+                <button class="btn btn-danger btn-mini"><%= link_to "<i class='icon-heart icon-white'></i>",mark_unsaved_feed_article_path(@feed, article), :method => :put %></button>
               <% else %>
-                <button class="btn btn-mini disabled"><i class="icon-heart"></i></button>
+                <button class="btn btn-mini disabled"><%= link_to "<i class='icon-heart'></i>", mark_saved_feed_article_path(@feed, article), :method => :put %></button>
               <% end %>
               <%= @feed.name %>
             </div>

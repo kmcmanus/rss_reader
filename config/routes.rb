@@ -1,5 +1,17 @@
 RssReader::Application.routes.draw do
-  resources :feeds
+  resources :feeds do
+    resources :articles do
+      member do
+        put :mark_read
+        put :mark_unread
+        put :mark_saved
+        put :mark_unsaved
+      end
+      collection do
+        put :mark_all_read
+      end
+    end
+  end
 
   devise_for :users
   root :to => 'feeds#index'
