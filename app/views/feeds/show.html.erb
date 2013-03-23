@@ -1,4 +1,6 @@
-<legend><%= @title %></legend>
+<% content_for :title do %>
+  <%= @title %>
+<% end %>
 
 <div class="accordion" id="accordion1">
   <% @articles.each do |article| %>

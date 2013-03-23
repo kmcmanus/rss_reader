@@ -1,0 +1,9 @@
+<%= link_to "Subscribe", new_feed_path, :class => "btn btn-primary" %>
+
+<ul>
+  <% current_user.feeds.each do |feed| %>
+    <li><%= link_to feed.name, feed_path(feed) %></li>
+  <% end %>
+</ul>
+
+

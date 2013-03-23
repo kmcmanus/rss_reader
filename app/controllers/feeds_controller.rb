@@ -2,7 +2,11 @@ class FeedsController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-    @feeds = current_user.feeds
+    @title = "Your Feeds"
+
+    @articles = current_user.articles.unread.desc
+
+    render 'show'
   end
 
   def new
@@ -16,6 +20,7 @@ class FeedsController < ApplicationController
       @feed.scrape
       @feed.save!
       redirect_to :action => 'index'
+      flash[:notice] = "You have now subscribed to #{@feed.name}."
     else
       redirect_to :action => 'edit'
     end

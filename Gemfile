@@ -24,7 +24,7 @@ gem 'simple_form'
 #gem 'rake-compiler'
 #gem 'mini_portile'
 gem 'nokogiri'
-
+gem 'andand'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

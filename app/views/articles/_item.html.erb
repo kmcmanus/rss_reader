@@ -1,19 +1,23 @@
 <div class="accordion-group">
   <div class="accordion-heading">
-     <div class="row show-grid">
-        <div class="span2">
+    <div class="row">
+      <div>
+        </div>
+       <div class="span2 info">          
           <% if article.saved %>
             <button data-id="<%= article.id %>" data-parent-id="<%= article.feed.id %>" class="btn btn-danger btn-mini"><i class='icon-heart icon-white'></i></button>
           <% else %>
             <button data-id="<%= article.id %>" data-parent-id="<%= article.feed.id %>" class="btn btn-mini disabled"><i class='icon-heart'></i></button>
           <% end %>
-          <%= article.feed.name %><br />
-          <abbr title="<%= article.date_published_offset.strftime "%F %r" %>"><%= article.helpful_date_published %></abbr>
+          <small><%= article.feed.name %></small>
         </div>
-        <div class="span9">
+        <div class="span7">
           <a class="accordion-toggle<%= ' muted' if article.read %>" data-toggle='collapse' data-id="<%= article.id %>" data-parent-id="<%= article.feed.id %>" data-parent='#accordion1' href="#collapse<%= article.id %>">
-            <%= article.title %>
+            <%= article.title.html_safe %>
           </a>
+        </div>
+        <div class="span2 info">          
+          <abbr title="<%= article.date_published_offset.strftime "%F %r" %>"><%= article.helpful_date_published %></abbr>
         </div>
       </div>
   </div>
@@ -21,7 +25,7 @@
     <div class="accordion-inner">
       <h4><a target="_blank" href="<%= article.url %>"><%= article.title%></a></h4>
       <p><small> <%= link_to article.feed.name, article.feed %> by <%= article.author%> </small></p>
-      <%= article.description.html_safe %>
+      <%= article.description.html_safe unless article.description.nil? %>
     </div>
   </div>
 </div>
