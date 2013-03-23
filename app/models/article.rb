@@ -13,13 +13,8 @@ class Article < ActiveRecord::Base
     end
   end
 
-  def mark_saved
-    self.saved = true
-    self.save!
-  end
-
-  def mark_unsaved
-    self.saved = false
+  def toggle_saved
+    self.saved = not(self.saved)
     self.save!
   end
 
