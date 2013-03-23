@@ -14,13 +14,9 @@
               <%= @feed.name %><br />
               <abbr title="<%= article.date_published_offset.strftime "%F %r" %>"><%= article.helpful_date_published %></abbr>
             </div>
-            <div class="span9 <%= 'muted' if article.read %>">
-              <a class="accordion-toggle" data-toggle='collapse' data-parent='#accordion1' href="#collapse<%= article.id %>">
-              <% if article.read %>
+            <div class="span9">
+              <a class="accordion-toggle<%= ' muted' if article.read %>" data-toggle='collapse' data-id="<%= article.id %>" data-parent-id="<%= @feed.id %>" data-parent='#accordion1' href="#collapse<%= article.id %>">
                 <%= article.title %>
-              <% else %>
-                <b><%= article.title %></b>
-              <% end %>
               </a>
             </div>
           </div>
