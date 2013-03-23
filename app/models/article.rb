@@ -4,7 +4,8 @@ class Article < ActiveRecord::Base
   belongs_to :feed
 
   scope :desc, order("date_published DESC")
-
+  scope :saved, where(:saved => true)
+  scope :unread, where(:read => false)
   def short_description
     if self.description.length <= 50
       self.description

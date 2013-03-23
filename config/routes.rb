@@ -11,7 +11,7 @@ RssReader::Application.routes.draw do
       end
     end
   end
-
+  match "/saved" => "users#saved"
   devise_for :users
   root :to => 'feeds#index'
   # The priority is based upon order of creation:

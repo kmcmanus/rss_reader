@@ -10,19 +10,21 @@ class FeedsController < ApplicationController
   end
 
   def create
-    @feed = Feed.create!
+    @feed = current_user.feeds.create!
     if @feed.update_attributes(params['feed'])
       @feed.load_base_data
       @feed.scrape
       @feed.save!
-      current_user.feeds << @feed
       redirect_to :action => 'index'
     else
       redirect_to :action => 'edit'
     end
   end
 
-  def show
+  def show    
     @feed = Feed.find params[:id]
+    @title = @feed.name
+
+    @articles = @feed.articles.desc
   end
 end
