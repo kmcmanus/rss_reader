@@ -3,7 +3,8 @@ require 'nokogiri'
 class Feed < ActiveRecord::Base
   attr_accessible :feed_url, :name, :site_url, :last_scraped, :most_recent_article_posted_on
   belongs_to :user
-  has_many :articles
+  validates_uniqueness_of :feed_url
+  has_many :articles, :dependent => :destroy
   def load_base_data
     xml = self.get_xml
 

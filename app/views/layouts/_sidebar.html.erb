@@ -1,3 +1,5 @@
+<% if user_signed_in? %>
+
 <%= link_to "Subscribe", new_feed_path, :class => "btn btn-primary" %>
 
 <ul>
@@ -6,4 +8,4 @@
   <% end %>
 </ul>
 
-
+<% end %>
