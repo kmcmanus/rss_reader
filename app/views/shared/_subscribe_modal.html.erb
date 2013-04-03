@@ -1,0 +1,21 @@
+<div id='subscription-modal' class="modal hide">
+  <div class="modal-header">
+    <h2>Subscribe
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      </h2>
+  </div>
+  <%= form_for Feed.new, :html => {:class => 'form-horizontal'} do |f| %>
+    <div class='modal-body'>
+      <div class='control-group'>
+        <%= f.label :feed_url, "URL", :class => 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :feed_url %>
+        </div>
+      </div>
+    </div>
+    <div class='modal-footer'>
+      <a href='#' data-dismiss="modal" class='btn'>Cancel</a>
+      <%= f.submit :class=> "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>
