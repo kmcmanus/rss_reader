@@ -9,6 +9,9 @@ mark_unsaved = (id) ->
 mark_read = (id) ->
   $("a.accordion-toggle[data-id='" + id + "']").addClass("muted")
 
+mark_unread = (id) ->
+  $("a.accordion-toggle[data-id='" + id + "']").removeClass("muted")
+
 toggle_saved = (id) ->
   if $('button[data-id="' + id + '"] i').hasClass("icon-white")
     mark_unsaved id
@@ -24,4 +27,9 @@ $(".accordion-toggle").click ->
   feed_id = $(this).attr("data-parent-id")
   article_id = $(this).attr("data-id")  
   $.post("/feeds/" + feed_id + "/articles/" + article_id + "/mark_read", {id: article_id}).done(-> mark_read(article_id)).fail(-> alert("failed"))
+
+$(".keep-unread").click ->
+  feed_id = $(this).attr("data-parent-id")
+  article_id = $(this).attr("data-id")  
+  $.post("/feeds/" + feed_id + "/articles/" + article_id + "/mark_unread", {id: article_id}).done(-> mark_unread(article_id)).fail(-> alert("failed"))
 

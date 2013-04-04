@@ -26,6 +26,8 @@
       <h4><a target="_blank" href="<%= article.url %>"><%= article.title%></a></h4>
       <p><small> <%= link_to article.feed.name, article.feed %> by <%= article.author%> </small></p>
       <%= article.description.html_safe unless article.description.nil? %>
+      <hr />
+      <a class='muted keep-unread' data-id="<%= article.id %>" data-parent-id="<%= article.feed.id %>" href="#">Keep Unread</a>
     </div>
   </div>
 </div>
