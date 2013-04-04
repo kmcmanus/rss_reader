@@ -42,13 +42,21 @@ class Article < ActiveRecord::Base
     @date_published_offset ||= self.date_published + DateTime.now.utc_offset
   end
 
-  def scrape_from node
-    scrape_attribute_from node, :date_published, 'pubDate'
-    scrape_attribute_from node, :description, 'description'
-    scrape_attribute_from node, :title, 'title'
+  def scrape_from node, type
+
     scrape_attribute_from node, :url, 'link'
-    scrape_attribute_from node, :guid, 'guid'
-    scrape_attribute_from node, :author, 'dc:creator'
+    scrape_attribute_from node, :title, 'title'
+    if type == 'rss'
+      scrape_attribute_from node, :date_published, 'pubDate'
+      scrape_attribute_from node, :description, 'description'
+      scrape_attribute_from node, :guid, 'guid'
+      scrape_attribute_from node, :author, 'dc:creator'
+    else
+      scrape_attribute_from node, :date_published, 'updated'
+      scrape_attribute_from node, :description, 'summary'
+      scrape_attribute_from node, :guid, 'id'
+      scrape_attribute_from node, :author, 'author/name'
+    end
   end
 
   private

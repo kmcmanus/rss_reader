@@ -8,9 +8,15 @@ class Feed < ActiveRecord::Base
   def load_base_data
     xml = self.get_xml
 
-    scrape_attribute_from xml, :name, 'title'
-    scrape_attribute_from xml, :site_url, 'link'
+    items = xml.xpath("/rss/channel")
+    puts items
+    if items.empty? 
+      xml.remove_namespaces!
+      items = xml.xpath("/feed")
+    end
 
+    scrape_attribute_from items, :name, 'title'
+    scrape_attribute_from items, :site_url, 'link'
   end
 
   def get_xml
@@ -20,12 +26,20 @@ class Feed < ActiveRecord::Base
   def scrape
     xml = get_xml
     last_published_date = DateTime.new 1970, 1, 1, 1, 1, 1
-    xml.xpath("/rss/channel/item").each do |node|
+    type = "rss"
+    items = xml.xpath("/rss/channel/item")
+
+    if items.empty? 
+      type = "atom"
+      items = xml.xpath("/feed/entry")
+    end
+
+    items.each do |node|
       item = Article.new :feed => self, :user => self.user
       item.date_recieved = DateTime.now
       item.read = false
       item.saved = false
-      item.scrape_from node
+      item.scrape_from node, type
       
       if item.date_published > last_published_date
         last_published_date = item.date_published
@@ -50,7 +64,8 @@ class Feed < ActiveRecord::Base
 
   private
   def scrape_attribute_from node, attribute, path
-    node.xpath("/rss/channel/#{path}").each do |node_path|
+    items = node.xpath()
+    node.xpath("./#{path}").each do |node_path|
       self[attribute] = node_path.inner_text
     end
   end
