@@ -32,4 +32,21 @@ class FeedsController < ApplicationController
 
     @articles = @feed.articles.desc
   end
+
+  def refresh
+    current_user.feeds.each do |feed|
+      feed.scrape
+    end
+
+    render :nothing => true
+  end
+
+  def mark_all_read
+    params["items"].values.each do |item|
+      article = Article.find(item['article'].to_i)
+      article.mark_read
+    end
+    render :nothing => true
+  end
+  
 end

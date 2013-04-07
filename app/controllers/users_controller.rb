@@ -7,4 +7,5 @@ class UsersController < ApplicationController
 
     render "feeds/show"
   end
+
 end

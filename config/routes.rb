@@ -6,9 +6,10 @@ RssReader::Application.routes.draw do
         post :mark_unread
         post :toggle_saved
       end
-      collection do
-        post :mark_all_read
-      end
+    end
+    collection do
+      post :refresh
+      post :mark_all_read
     end
   end
   match "/saved" => "users#saved"
